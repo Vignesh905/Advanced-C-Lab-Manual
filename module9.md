@@ -12,12 +12,92 @@ Algorithm:
 7.	Use the display function to visualize the stack's contents
  
 Program:
+```
+#include <stdio.h>
+#define MAX 5 
 
-//type your code here
+struct Stack {
+    int arr[MAX];
+    int top;
+};
+void initializeStack(struct Stack *stack) {
+    stack->top = -1; // Stack is initially empty
+}
+
+int isFull(struct Stack *stack) {
+    return stack->top == MAX - 1;
+}
+int isEmpty(struct Stack *stack) {
+    return stack->top == -1;
+}
+void push(struct Stack *stack, int value) {
+    if (isFull(stack)) {
+        printf("Stack Overflow! Cannot push %d\n", value);
+    } else {
+        stack->arr[++stack->top] = value;
+        printf("Pushed %d into stack\n", value);
+    }
+}
+
+int pop(struct Stack *stack) {
+    if (isEmpty(stack)) {
+        printf("Stack Underflow! No elements to pop.\n");
+        return -1; 
+    } else {
+        return stack->arr[stack->top--];
+    }
+}
+
+int peek(struct Stack *stack) {
+    if (isEmpty(stack)) {
+        printf("Stack is empty!\n");
+        return -1;
+    } else {
+        return stack->arr[stack->top];
+    }
+}
+
+void displayStack(struct Stack *stack) {
+    if (isEmpty(stack)) {
+        printf("Stack is empty!\n");
+    } else {
+        printf("Stack elements are: \n");
+        for (int i = 0; i <= stack->top; i++) {
+            printf("%d ", stack->arr[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Stack stack;
+    int value;
+    initializeStack(&stack);
+
+    push(&stack, 10);
+    push(&stack, 20);
+    push(&stack, 30);
+    push(&stack, 40);
+    push(&stack, 50);
+    displayStack(&stack);
+
+    push(&stack, 60);
+
+    value = pop(&stack);
+    printf("Popped value: %d\n", value);
+    displayStack(&stack);
+    value = peek(&stack);
+    printf("Top element: %d\n", value);
+
+    return 0;
+}
+
+```
 
 Output:
+![image](https://github.com/user-attachments/assets/4cb2a418-1e16-4500-8983-7fb2e771202d)
 
-//paste your output here
+
 
 
 
@@ -35,12 +115,64 @@ Algorithm:
 4.	Call the push function as needed.
  
 Program:
+```
+#include <stdio.h>
+#define MAX 5 
 
-//type your code here
+struct Stack {
+    int arr[MAX];
+    int top;
+};
+
+void initializeStack(struct Stack *stack) {
+    stack->top = -1; // Stack is initially empty
+}
+
+int isFull(struct Stack *stack) {
+    return stack->top == MAX - 1;
+}
+void push(struct Stack *stack, int value) {
+    if (isFull(stack)) {
+        printf("Stack Overflow! Cannot push %d\n", value);
+    } else {
+        stack->arr[++stack->top] = value; 
+        printf("Pushed %d into stack\n", value);
+    }
+}
+void displayStack(struct Stack *stack) {
+    if (stack->top == -1) {
+        printf("Stack is empty!\n");
+    } else {
+        printf("Stack elements are: \n");
+        for (int i = 0; i <= stack->top; i++) {
+            printf("%d ", stack->arr[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Stack stack;
+    int value;
+    initializeStack(&stack);
+
+    push(&stack, 10);
+    push(&stack, 20);
+    push(&stack, 30);
+    push(&stack, 40);
+    push(&stack, 50);
+
+ 
+    displayStack(&stack);
+    push(&stack, 60);
+
+    return 0;
+}
+```
+
 
 Output:
-
-//paste your output here
+![image](https://github.com/user-attachments/assets/96c53cd3-0ccb-4231-a505-afe7f1a902fa)
 
 
 
@@ -61,12 +193,92 @@ Algorithm:
 4.	Call the display function and perform other queue operations as needed.
  
 Program:
+```
+#include <stdio.h>
+#define MAX 5
+struct Queue {
+    int arr[MAX];
+    int front;
+    int rear;
+};
 
-//type your code here
+void initializeQueue(struct Queue *queue) {
+    queue->front = -1;
+    queue->rear = -1;
+}
+
+int isFull(struct Queue *queue) {
+    return queue->rear == MAX - 1;
+}
+
+int isEmpty(struct Queue *queue) {
+    return queue->front == -1 || queue->front > queue->rear;
+}
+
+void enqueue(struct Queue *queue, int value) {
+    if (isFull(queue)) {
+        printf("Queue Overflow! Cannot enqueue %d\n", value);
+    } else {
+        if (queue->front == -1) {
+            queue->front = 0; // First element being added
+        }
+        queue->arr[++queue->rear] = value;
+        printf("Enqueued %d into the queue\n", value);
+    }
+}
+
+int dequeue(struct Queue *queue) {
+    if (isEmpty(queue)) {
+        printf("Queue Underflow! No elements to dequeue\n");
+        return -1; // Return -1 to indicate error
+    } else {
+        int dequeuedValue = queue->arr[queue->front++];
+        if (queue->front > queue->rear) {
+            // Reset the queue if it becomes empty
+            queue->front = queue->rear = -1;
+        }
+        return dequeuedValue;
+    }
+}
+void displayQueue(struct Queue *queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty!\n");
+    } else {
+        printf("Queue elements are: \n");
+        for (int i = queue->front; i <= queue->rear; i++) {
+            printf("%d ", queue->arr[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Queue queue;
+    int value;
+
+ 
+    initializeQueue(&queue);
+
+    enqueue(&queue, 10);
+    enqueue(&queue, 20);
+    enqueue(&queue, 30);
+    enqueue(&queue, 40);
+    enqueue(&queue, 50);
+    displayQueue(&queue);
+    enqueue(&queue, 60);
+    value = dequeue(&queue);
+    printf("Dequeued value: %d\n", value);
+    displayQueue(&queue);
+
+    return 0;
+}
+```
+
 
 Output:
 
-//paste your output here
+![image](https://github.com/user-attachments/assets/b3505cc0-14c2-485b-b8be-ef54245610c7)
+
 
 
 Result:
@@ -86,11 +298,81 @@ Algorithm:
 
 Program:
 
-//type your code here
+```
+#include <stdio.h>
+#define MAX 5 
+
+
+struct Queue {
+    int arr[MAX];
+    int front;
+    int rear;
+};
+
+
+void initializeQueue(struct Queue *queue) {
+    queue->front = -1;
+    queue->rear = -1;
+}
+
+int isFull(struct Queue *queue) {
+    return queue->rear == MAX - 1;
+}
+
+int isEmpty(struct Queue *queue) {
+    return queue->front == -1 || queue->front > queue->rear;
+}
+
+
+void enqueue(struct Queue *queue, int value) {
+    if (isFull(queue)) {
+        printf("Queue Overflow! Cannot enqueue %d\n", value);
+    } else {
+        if (queue->front == -1) {
+            queue->front = 0; // First element being added
+        }
+        queue->arr[++queue->rear] = value; // Add element at rear
+        printf("Enqueued %d into the queue\n", value);
+    }
+}
+
+
+void displayQueue(struct Queue *queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty!\n");
+    } else {
+        printf("Queue elements are: \n");
+        for (int i = queue->front; i <= queue->rear; i++) {
+            printf("%d ", queue->arr[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Queue queue;
+    int value;
+    initializeQueue(&queue);
+
+    enqueue(&queue, 10);
+    enqueue(&queue, 20);
+    enqueue(&queue, 30);
+    enqueue(&queue, 40);
+    enqueue(&queue, 50);
+
+ 
+    displayQueue(&queue);
+    enqueue(&queue, 60);
+
+    return 0;
+}
+
+```
 
 Output:
 
-//paste your output here
+![image](https://github.com/user-attachments/assets/7209ca95-08dc-4d71-9d79-11a847957b65)
+
 
 Result:
 Thus, the program to insert elements in queue using array is verified successfully.
@@ -121,11 +403,93 @@ o	After deletion, check if the front pointer has passed the rear pointer (front 
 
 Program:
 
-//type your code here
+```
+#include <stdio.h>
+#define MAX 5 
+
+struct Queue {
+    int arr[MAX];
+    int front;
+    int rear;
+};
+
+void initializeQueue(struct Queue *queue) {
+    queue->front = -1;
+    queue->rear = -1;
+}
+int isFull(struct Queue *queue) {
+    return queue->rear == MAX - 1;
+}
+
+int isEmpty(struct Queue *queue) {
+    return queue->front == -1 || queue->front > queue->rear;
+}
+
+void enqueue(struct Queue *queue, int value) {
+    if (isFull(queue)) {
+        printf("Queue Overflow! Cannot enqueue %d\n", value);
+    } else {
+        if (queue->front == -1) {
+            queue->front = 0; // First element being added
+        }
+        queue->arr[++queue->rear] = value; // Add element at rear
+        printf("Enqueued %d into the queue\n", value);
+    }
+}
+
+int dequeue(struct Queue *queue) {
+    if (isEmpty(queue)) {
+        printf("Queue Underflow! No elements to dequeue\n");
+        return -1; // Return -1 to indicate error
+    } else {
+        int dequeuedValue = queue->arr[queue->front];
+        queue->front++; 
+        if (queue->front > queue->rear) {
+           
+            queue->front = queue->rear = -1;
+        }
+        return dequeuedValue;
+    }
+}
+
+void displayQueue(struct Queue *queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty!\n");
+    } else {
+        printf("Queue elements are: \n");
+        for (int i = queue->front; i <= queue->rear; i++) {
+            printf("%d ", queue->arr[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Queue queue;
+    int value;
+
+
+    initializeQueue(&queue);
+    enqueue(&queue, 10);
+    enqueue(&queue, 20);
+    enqueue(&queue, 30);
+    enqueue(&queue, 40);
+    enqueue(&queue, 50);
+
+    displayQueue(&queue);
+    value = dequeue(&queue);
+    printf("Dequeued value: %d\n", value);
+    displayQueue(&queue);
+
+    return 0;
+}
+
+```
 
 Output:
 
-//paste your output here
+![image](https://github.com/user-attachments/assets/a5155657-e9de-4f21-9a83-2c1e1bf3a810)
+
 
 
 Result:
