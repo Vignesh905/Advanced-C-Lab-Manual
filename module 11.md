@@ -12,10 +12,47 @@ Algorithm:
 5.	Call the max_of_four function with the input integers and store the result in the greater variable
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+int findGreatest(int arr[], int size) {
+    int greatest = arr[0];  // Assume the first element is the greatest
+
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > greatest) {
+            greatest = arr[i];  // Update greatest if a larger number is found
+        }
+    }
+    return greatest;
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter the elements:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    int greatest = findGreatest(arr, n);
+    printf("The greatest number is: %d\n", greatest);
+
+    return 0;
+}
+```
 
 Output:
-//paste your output here
+Enter the number of elements: 5      
+Enter the elements:             
+10
+20
+5
+30
+25
+The greatest number is: 30
+
 
 Result:
 Thus, the program  that create a function to find the greatest number is verified successfully.
@@ -36,10 +73,41 @@ Algorithm:
 7.	Call the calculate_the_max function with input values.
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+int bitwiseAND(int a, int b) {
+    return a & b;
+}
+
+int bitwiseOR(int a, int b) {
+    return a | b;
+}
+int bitwiseXOR(int a, int b) {
+    return a ^ b;
+}
+
+int main() {
+    printf("Enter two numbers: ");
+    scanf("%d %d", &num1, &num2);
+    int andResult = bitwiseAND(num1, num2);
+    int orResult = bitwiseOR(num1, num2);
+    int xorResult = bitwiseXOR(num1, num2);
+    printf("AND operation result: %d\n", andResult);
+    printf("OR operation result: %d\n", orResult);
+    printf("XOR operation result: %d\n", xorResult);
+
+    return 0;
+}
+```
+
 
 Output:
-//paste your output here
+Enter two numbers: 5 3  
+AND operation result: 1   
+OR operation result: 7    
+XOR operation result: 6    
+
 
 Result:
 Thus, the program to print the maximum values for the AND, OR and XOR comparisons
@@ -59,10 +127,137 @@ Algorithm:
 5.	Use a for loop to iterate over the queries.
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+#include <stdlib.h>
+int add(int a, int b) {
+    return a + b;
+}
+
+int subtract(int a, int b) {
+    return a - b;
+}
+
+int multiply(int a, int b) {
+    return a * b;
+}
+
+float divide(int a, int b) {
+    if (b == 0) {
+        printf("Error! Division by zero is not allowed.\n");
+        return -1;  // Return -1 to indicate an error
+    }
+    return (float)a / b;
+}
+
+int findGreatest(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+void displayMenu() {
+    printf("\nMenu:\n");
+    printf("1. Add two numbers\n");
+    printf("2. Subtract two numbers\n");
+    printf("3. Multiply two numbers\n");
+    printf("4. Divide two numbers\n");
+    printf("5. Find the greatest number\n");
+    printf("6. Exit\n");
+}
+
+int main() {
+    int choice, num1, num2;
+
+    while (1) {
+        displayMenu();
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter two numbers: ");
+                scanf("%d %d", &num1, &num2);
+                printf("Result: %d\n", add(num1, num2));
+                break;
+            case 2:
+                printf("Enter two numbers: ");
+                scanf("%d %d", &num1, &num2);
+                printf("Result: %d\n", subtract(num1, num2));
+                break;
+            case 3:
+                printf("Enter two numbers: ");
+                scanf("%d %d", &num1, &num2);
+                printf("Result: %d\n", multiply(num1, num2));
+                break;
+            case 4:
+                printf("Enter two numbers: ");
+                scanf("%d %d", &num1, &num2);
+                float result = divide(num1, num2);
+                if (result != -1) {
+                    printf("Result: %.2f\n", result);
+                }
+                break;
+            case 5:
+                printf("Enter two numbers: ");
+                scanf("%d %d", &num1, &num2);
+                printf("The greatest number is: %d\n", findGreatest(num1, num2));
+                break;
+            case 6:
+                printf("Exiting the program.\n");
+                exit(0);  // Exit the program
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+```
 
 Output:
-//paste your output here
+Menu:
+1. Add two numbers
+2. Subtract two numbers
+3. Multiply two numbers
+4. Divide two numbers
+5. Find the greatest number
+6. Exit
+Enter your choice: 1
+Enter two numbers: 5 3
+Result: 8
+
+Menu:
+1. Add two numbers
+2. Subtract two numbers
+3. Multiply two numbers
+4. Divide two numbers
+5. Find the greatest number
+6. Exit
+Enter your choice: 4
+Enter two numbers: 10 2
+Result: 5.00
+
+Menu:
+1. Add two numbers
+2. Subtract two numbers
+3. Multiply two numbers
+4. Divide two numbers
+5. Find the greatest number
+6. Exit
+Enter your choice: 5
+Enter two numbers: 5 8
+The greatest number is: 8
+
+Menu:
+1. Add two numbers
+2. Subtract two numbers
+3. Multiply two numbers
+4. Divide two numbers
+5. Find the greatest number
+6. Exit
+Enter your choice: 6
+Exiting the program.
+
 
 
 Result:
@@ -86,10 +281,42 @@ Algorithm:
 
 
 Program:
-//type your code here
+```
+#include <stdio.h>
+int sumOfArray(int arr[], int size)
+ {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];  // Add each element to sum
+    }
+    return sum;
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d integers:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    int sum = sumOfArray(arr, n);
+    printf("The sum of the integers in the array is: %d\n", sum);
+
+    return 0;
+}
+
+```
 
 Output:
-//paste your output here
+
+Enter the number of elements in the array: 5
+Enter 5 integers:
+1 2 3 4 5
+The sum of the integers in the array is: 15
+
 
  
 
@@ -99,10 +326,8 @@ Thus, the program prints the sum of the integers in the array is verified succes
 
 
  
+
 EXP NO 25: C PROGRAM TO COUNT THE NUMBER OF WORDS IN A      SENTENCE
-
-
-
 Aim:
 
 To write a C program that counts the number of words in a given sentence.
@@ -120,10 +345,40 @@ o	If a character is not a space, it may belong to a word. If it's the first non-
 
 
 Program:
-//type your code here
+```
+#include <stdio.h>
+#include <ctype.h>
+int countWords(char sentence[]) {
+    int count = 0, i = 0;
+    while (sentence[i] != '\0') {
+        // Skip any spaces
+        while (sentence[i] == ' ' || sentence[i] == '\t') {
+            i++;
+        }
+        if (sentence[i] != '\0') {
+            count++;
+            while (sentence[i] != ' ' && sentence[i] != '\t' && sentence[i] != '\0') {
+                i++;
+            }
+        }
+    }
+    return count;
+}
+
+int main() {
+    printf("Enter a sentence: ");
+    fgets(sentence, sizeof(sentence), stdin);
+    int wordCount = countWords(sentence);
+    printf("The number of words in the sentence is: %d\n", wordCount);
+
+    return 0;
+}
+```
 
 Output:
-//paste your output here
+Enter a sentence: Hello world, this is a test sentence.
+The number of words in the sentence is: 7
+
 
 
 
