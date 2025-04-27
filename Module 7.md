@@ -16,12 +16,43 @@ Else
  
 Program:
 
-//type your code here
+```
+#include <stdio.h>
 
+#define MAX 5 
+
+struct Person {
+    char name[50];
+    int age;
+};
+
+int main() {
+    struct Person persons[MAX];
+    int i;
+    printf("Enter details for %d persons:\n", MAX);
+    for (i = 0; i < MAX; i++) {
+        printf("\nPerson %d:\n", i + 1);
+        printf("Name: ");
+        scanf("%s", persons[i].name);
+        printf("Age: ");
+        scanf("%d", &persons[i].age);
+    }
+    printf("\nVaccine Eligibility List:\n");
+    for (i = 0; i < MAX; i++) {
+        if (persons[i].age > 6) {
+            printf("%s is eligible for the vaccine (Age: %d)\n", persons[i].name, persons[i].age);
+        } else {
+            printf("%s is NOT eligible for the vaccine (Age: %d)\n", persons[i].name, persons[i].age);
+        }
+    }
+
+    return 0;
+}
+```
 
 Output:
+![Screenshot 2025-04-27 183516](https://github.com/user-attachments/assets/b58e309b-f693-47f0-86d6-432c0819989d)
 
-//paste your output here
 
 
 Result:
@@ -43,8 +74,47 @@ Algorithm:
 7.	Return 0
  
 Program:
+```
+#include <stdio.h>
 
-//type your code here
+struct Student {
+    char name[50];
+    int marks1, marks2;
+    float average;
+};
+
+
+struct Student calculateAverage(struct Student s) {
+    s.average = (s.marks1 + s.marks2) / 2.0;
+    return s;
+}
+
+
+void displayStudent(struct Student s) {
+    printf("\nStudent Details:\n");
+    printf("Name   : %s\n", s.name);
+    printf("Marks1 : %d\n", s.marks1);
+    printf("Marks2 : %d\n", s.marks2);
+    printf("Average: %.2f\n", s.average);
+}
+
+int main() {
+    struct Student stu;
+    printf("Enter student name: ");
+    scanf("%s", stu.name);
+    printf("Enter marks for subject 1: ");
+    scanf("%d", &stu.marks1);
+    printf("Enter marks for subject 2: ");
+    scanf("%d", &stu.marks2);
+    stu = calculateAverage(stu);
+    displayStudent(stu);
+
+    return 0;
+}
+```
+
+
+
 
 
 
@@ -52,7 +122,8 @@ Program:
 Output:
 
 
-//paste your output here
+![image](https://github.com/user-attachments/assets/7e0fbfb2-c4ce-4fcd-9790-7129e7f26b9a)
+
 
 
 
@@ -86,24 +157,32 @@ Use scanf to input the file name into the name array.
  
 Program:
 
-//type your code here
+```
+#include <stdio.h>
+
+int main() {
+    char filename[100];
+    printf("Enter the file name: ");
+    scanf("%s", filename);
+    printf("You entered: %s\n", filename);
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Error: Cannot open file %s\n", filename);
+    } else {
+        printf("File %s opened successfully!\n", filename);
+        fclose(fp);
+    }
+
+    return 0;
+}
+```
 
 
 
 
 Output:
 
-
-//paste your output here
-
-
-
-
-
-
-
-
-
+![image](https://github.com/user-attachments/assets/d2a24db8-40b3-4c00-b6da-f1515f4af6bf)
 
 
 Result:
@@ -132,8 +211,53 @@ Use scanf to input the file name into the name array and the number of strings i
 5.	Return 0 to indicate successful program execution.
  
 Program:
+```
+#include <stdio.h>
+#include <stdlib.h>
 
-//type your code here
+int main() {
+    char filename[100];
+    char text[500];
+    char ch;
+    FILE *fp;
+
+
+    printf("Enter the file name: ");
+    scanf("%s", filename);
+
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Error: Cannot open file %s for reading!\n", filename);
+        return 1;
+    }
+
+ 
+    printf("\nCurrent contents of the file:\n");
+    while ((ch = fgetc(fp)) != EOF) {
+        putchar(ch);
+    }
+    fclose(fp);
+
+  
+    fp = fopen(filename, "a");
+    if (fp == NULL) {
+        printf("Error: Cannot open file %s for appending!\n", filename);
+        return 1;
+    }
+
+
+    printf("\n\nEnter text to append into the file:\n");
+    getchar(); // Clear newline left by previous scanf
+    fgets(text, sizeof(text), stdin);
+
+    fputs(text, fp);
+    printf("Text inserted successfully!\n");
+
+    fclose(fp);
+
+    return 0;
+}
+```
 
 
 
@@ -141,11 +265,7 @@ Program:
 Output:
 
 
-//paste your output here
-
-
-
-
+![image](https://github.com/user-attachments/assets/ea5a203a-de1e-4447-8530-3a8a6d0fb63e)
 
 
 Result:
@@ -187,7 +307,43 @@ Algorithm:
 
 Program:
 
-//type your code here
+```
+#include <stdio.h>
+#include <stdlib.h>
+struct Subject {
+    char name[50];
+    int marks;
+};
+
+int main() {
+    struct Subject *subjects;
+    int n, i;
+    printf("Enter the number of subjects: ");
+    scanf("%d", &n);
+    subjects = (struct Subject *)malloc(n * sizeof(struct Subject));
+    if (subjects == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    printf("\nEnter details for each subject:\n");
+    for (i = 0; i < n; i++) {
+        printf("\nSubject %d:\n", i + 1);
+        printf("Name: ");
+        scanf("%s", subjects[i].name);
+        printf("Marks: ");
+        scanf("%d", &subjects[i].marks);
+    }
+
+    printf("\nStored Subject Details:\n");
+    for (i = 0; i < n; i++) {
+        printf("Subject %d: %s - Marks: %d\n", i + 1, subjects[i].name, subjects[i].marks);
+    }
+
+    free(subjects);
+
+    return 0;
+}
+```
 
 
 
@@ -195,7 +351,8 @@ Program:
 Output:
 
 
-//paste your output here
+![image](https://github.com/user-attachments/assets/f50a6483-f1a8-4b9a-a3a4-fcda4c6e2283)
+
 
 
 
